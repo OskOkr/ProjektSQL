@@ -120,6 +120,12 @@ for each row execute procedure premia()
 
 --7b) Sprawdzenie, że wyzwalacz 2 działa
 
+update pracownicy 
+set podwyzka = TRUE
+where id_pracownicy = 3
+
+select id_pracownicy,awans,podwyzka from pracownicy where id_pracownicy = 3
+
 --8a) Tworzymy wyzwalacz 3
 
 --8b) Sprawdzenie, że wyzwalacz 3 działa
