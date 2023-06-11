@@ -68,8 +68,17 @@ $$ LANGUAGE plpgsql;
 SELECT * FROM wypisz_opinie(5);
 
 --5a) Tworzymy procedurę 2
+CREATE OR REPLACE FUNCTION wypisz_stalych_klientow()
+RETURNS SETOF klient AS
+$$
+BEGIN
+    RETURN QUERY
+    SELECT * FROM klient WHERE staly_klient = TRUE;
+END;
+$$ LANGUAGE 'plpgsql';
 
 --5b) Sprawdzenie, że procedura 2 działa
+SELECT * FROM wypisz_stalych_klientow();
 
 --6a) Tworzymy wyzwalacz 1
 create function najnizsza_krajowa()
@@ -92,6 +101,7 @@ set pesja = 1500
 where nazwa = sprzedawca
 
 select pesja,nazwa from stanowisko where nazwa = sprzedawca
+
 --7a) Tworzymy wyzwalacz 2
 
 --7b) Sprawdzenie, że wyzwalacz 2 działa
