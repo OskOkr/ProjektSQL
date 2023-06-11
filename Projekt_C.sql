@@ -108,7 +108,7 @@ create function premia()
 returns trigger as $$
 begin 
  if new.awans = TRUE THEN
-  update pracownik set podwyzka=true where id_pracownicy=new.id_pracownicy;
+  update pracownik set podwyzka=true,awans=true where id_pracownicy=new.id_pracownicy;
  end IF;
  return new;
 end;
