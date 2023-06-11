@@ -63,15 +63,19 @@ SELECT liczba_czesci_dostawcy(2);
 --5b) Sprawdzenie, że procedura 2 działa
 
 --6a) Tworzymy wyzwalacz 1
-create function najnizsza_krajowa()
-return trigger as $$
-begin 
- if NEW.pensja < 1800 then 
-  update stanowisko set pensja=1800 where pensja=new.pensja;
- end IF;
- return new;
-end;
-$$ LANGUAGE 'plpqsql';
+begin TRANSACTION;
+DECLARE kur CURSOR for 
+select k.imie, k.nazwisko, p.imie as "imie pracownika", p.nazwisko as "nazwisko pracownika" from klient k 
+join sprzet s on k.id_klient = s.id_klient
+join naprawa n on s.id_naprawa = n.id_naprawa
+join pracownicy_naprawy pn on n.id_naprawa = pn.id_naprawa
+join pracownicy p on pn.id_pracownicy = p.id_pracownicy
+ORDER BY k.nazwisko, k.imie, p.id_pracownicy, p.nazwisko, p.imie, s.id_naprawa;
+
+fetch 3 from kur;
+
+close kur;
+COMMIT TRANSACTION;
 
 --6b) Sprawdzenie, że wyzwalacz 1 działa
 update stanowisko 
