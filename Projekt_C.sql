@@ -129,4 +129,18 @@ fetch 3 from kur;
 close kur;
 COMMIT TRANSACTION;
 
+---------------------------------------------
+
+begin TRANSACTION;
+DECLARE gwi CURSOR for 
+
+select o.ilosc_gwiazdek,p.imie,p.nazwisko,s.nazwa from opinia_o_pracowniku o 
+join pracowncy p on o.idpracownicy = p.idpracownicy 
+join stanowisko s on s.idstanowisko =p.idstanowisko
+order by o.ilosc_gwiazdek,p.imie,p.nazwisko,s.nazwa
+
+fetch all from gwi;
+
+close gwi;
+COMMIT TRANSACTION;
 --10b) Sprawdzenie, że kursory działają
