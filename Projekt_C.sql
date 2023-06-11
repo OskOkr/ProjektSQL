@@ -104,4 +104,7 @@ ORDER BY k.nazwisko, k.imie, p.id_pracownicy, p.nazwisko, p.imie, s.id_naprawa;
 
 fetch 3 from kur;
 
+close kur;
+COMMIT TRANSACTION;
+
 --10b) Sprawdzenie, że kursory działają
