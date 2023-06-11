@@ -145,8 +145,26 @@ for each row execute procedure premiazawyksztalcenie()
 --8b) Sprawdzenie, że wyzwalacz 3 działa
 
 --9a) Tworzymy wyzwalacz 4
+CREATE OR REPLACE FUNCTION aktualizuj_przewidywane_zakonczenie()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.zakonczono = TRUE THEN
+        NEW.przewidywane_zakonczenie := CURRENT_DATE;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER aktualizuj_przewidywane_zakonczenie
+BEFORE INSERT OR UPDATE ON naprawa
+FOR EACH ROW EXECUTE PROCEDURE aktualizuj_przewidywane_zakonczenie();
 
 --9b) Sprawdzenie, że wyzwalacz 4 działa
+UPDATE naprawa
+SET zakonczono = TRUE
+WHERE id_naprawa IN (1, 2, 3, 4, 5);
+
+SELECT * FROM naprawa
 
 --10a) Tworzymy 2 kursory
 begin TRANSACTION;
