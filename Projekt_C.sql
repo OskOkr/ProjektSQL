@@ -104,6 +104,20 @@ select pensja, nazwa from stanowisko where nazwa = 'Sprzedawca'
 
 --7a) Tworzymy wyzwalacz 2
 
+create function premia()
+returns trigger as $$
+begin 
+ if new.awans = TRUE
+  update pracownik set podwyzka=true where idpracownicy=new.idpracownicy;
+ end IF;
+ return new;
+end;
+$$ LANGUAGE 'plpgsql';
+
+create trigger premia
+after update on stanowisko
+for each row execute procedure premia()
+
 --7b) Sprawdzenie, że wyzwalacz 2 działa
 
 --8a) Tworzymy wyzwalacz 3
