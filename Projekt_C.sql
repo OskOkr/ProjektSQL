@@ -97,10 +97,10 @@ for each row execute procedure najnizsza_krajowa()
 
 --6b) Sprawdzenie, że wyzwalacz 1 działa
 update stanowisko 
-set pesja = 1500 
-where nazwa = sprzedawca
+set pensja = 1500 
+where nazwa = 'Sprzedawca'
 
-select pesja,nazwa from stanowisko where nazwa = sprzedawca
+select pensja, nazwa from stanowisko where nazwa = 'Sprzedawca'
 
 --7a) Tworzymy wyzwalacz 2
 
