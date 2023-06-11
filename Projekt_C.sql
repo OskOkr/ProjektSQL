@@ -144,6 +144,14 @@ for each row execute procedure premiazawyksztalcenie()
 
 --8b) Sprawdzenie, że wyzwalacz 3 działa
 
+update pracownicy 
+set wyksztalcenie = srednie
+where id_pracownicy = 2
+
+select id_pracownicy,wyksztalcenie,podwyzka from pracownicy
+where id_pracownicy = 2
+
+
 --9a) Tworzymy wyzwalacz 4
 CREATE OR REPLACE FUNCTION aktualizuj_przewidywane_zakonczenie()
 RETURNS TRIGGER AS $$
