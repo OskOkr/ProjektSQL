@@ -55,8 +55,17 @@ $$ LANGUAGE plpgsql;
 SELECT liczba_czesci_dostawcy(2);
 
 --4a) Tworzymy procedurę 1
+CREATE FUNCTION wypisz_opinie(p_ocena INT)
+RETURNS SETOF opinie_o_naprawie AS
+$$
+BEGIN
+    RETURN QUERY
+    SELECT * FROM opinie_o_naprawie WHERE ocena_gwiazdki = p_ocena;
+END;
+$$ LANGUAGE plpgsql;
 
 --4b) Sprawdzenie, że procedura 1 działa
+SELECT * FROM wypisz_opinie(5);
 
 --5a) Tworzymy procedurę 2
 
