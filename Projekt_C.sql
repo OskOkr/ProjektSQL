@@ -135,9 +135,9 @@ begin TRANSACTION;
 DECLARE gwi CURSOR for 
 
 select o.ilosc_gwiazdek,p.imie,p.nazwisko,s.nazwa from opinia_o_pracowniku o 
-join pracowncy p on o.idpracownicy = p.idpracownicy 
-join stanowisko s on s.idstanowisko =p.idstanowisko
-order by o.ilosc_gwiazdek,p.imie,p.nazwisko,s.nazwa
+join pracownicy p on o.id_pracownicy = p.id_pracownicy 
+join stanowisko s on s.id_stanowisko =p.id_stanowisko
+order by o.ilosc_gwiazdek,p.imie,p.nazwisko,s.nazwa;
 
 fetch all from gwi;
 
