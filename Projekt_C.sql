@@ -132,7 +132,7 @@ create function premiazawyksztalcenie()
 returns trigger as $$
 begin 
  if old.wyksztalcenie<>new.wyksztalcenie THEN
-  update pracownik set podwyzka=true id_pracownicy=new.id_pracownicy;
+  update pracownicy set podwyzka=true WHERE id_pracownicy=new.id_pracownicy;
  end IF;
  return new;
 end;
@@ -145,7 +145,7 @@ for each row execute procedure premiazawyksztalcenie()
 --8b) Sprawdzenie, że wyzwalacz 3 działa
 
 update pracownicy 
-set wyksztalcenie = srednie
+set wyksztalcenie = 'Średnie'
 where id_pracownicy = 2
 
 select id_pracownicy,wyksztalcenie,podwyzka from pracownicy
