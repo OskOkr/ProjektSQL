@@ -64,10 +64,10 @@ SELECT liczba_czesci_dostawcy(2);
 
 --6a) Tworzymy wyzwalacz 1
 create function najnizsza_krajowa()
-return trigger sa $$
+return trigger as $$
 begin 
- if NEW.pensja < 1600 then 
-  update stanowisko set pensja=1600 where pensja=new.pensja;
+ if NEW.pensja < 1800 then 
+  update stanowisko set pensja=1800 where pensja=new.pensja;
  end IF;
  return new;
 end;
