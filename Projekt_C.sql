@@ -82,14 +82,14 @@ SELECT * FROM wypisz_stalych_klientow();
 
 --6a) Tworzymy wyzwalacz 1
 create function najnizsza_krajowa()
-return trigger sa $$
+returns trigger as $$
 begin 
  if NEW.pensja < 1600 then 
   update stanowisko set pensja=1600 where pensja=new.pensja;
  end IF;
  return new;
 end;
-$$ LANGUAGE 'plpqsql';
+$$ LANGUAGE 'plpgsql';
 
 create trigger najnizsza_krajowa
 after update on stanowisko
