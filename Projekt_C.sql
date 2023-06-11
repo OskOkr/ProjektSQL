@@ -93,4 +93,17 @@ select pesja,nazwa from stanowisko where nazwa = sprzedawca
 
 --10a) Tworzymy 2 kursory
 
+begin TRANSACTION
+DECLARE kur CURSOR for 
+select k.imie, k.nazwisko, p.imie as "imie pracownika", p.nazwisko as "nazwisko pracownika" from klient k 
+join sprzet s on k.id_klient = s.id_klient
+join naprawa n on s.id_naprawa = n.id_naprawa
+join pracownicy_naprawy pn on n.id_naprawa = pn.id_naprawa
+join pracownicy p on pn.id_pracownicy = p.id_pracownicy
+
+fetch 3 from kur
+
+close kur
+COMMIT TRANSACTION
+
 --10b) Sprawdzenie, że kursory działają
