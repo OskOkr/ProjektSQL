@@ -74,7 +74,11 @@ end;
 $$ LANGUAGE 'plpqsql';
 
 --6b) Sprawdzenie, że wyzwalacz 1 działa
+update stanowisko 
+set pesja = 1500 
+where nazwa = sprzedawca
 
+select pesja,nazwa from stanowisko where nazwa = sprzedawca
 --7a) Tworzymy wyzwalacz 2
 
 --7b) Sprawdzenie, że wyzwalacz 2 działa
