@@ -128,6 +128,20 @@ select id_pracownicy,awans,podwyzka from pracownicy where id_pracownicy = 3
 
 --8a) Tworzymy wyzwalacz 3
 
+create function premiazawyksztalcenie()
+returns trigger as $$
+begin 
+ if old.wyksztalcenie<>new.wyksztalcenie THEN
+  update pracownik set podwyzka=true id_pracownicy=new.id_pracownicy;
+ end IF;
+ return new;
+end;
+$$ LANGUAGE 'plpgsql';
+
+create trigger premiazawyksztalcenie
+after update on pracownicy
+for each row execute procedure premiazawyksztalcenie()
+
 --8b) Sprawdzenie, że wyzwalacz 3 działa
 
 --9a) Tworzymy wyzwalacz 4
