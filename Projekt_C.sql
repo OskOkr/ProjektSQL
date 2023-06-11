@@ -73,6 +73,9 @@ begin
 end;
 $$ LANGUAGE 'plpqsql';
 
+create trigger najnizsza_krajowa
+after update on stanowisko
+for each row execute procedure najnizsza_krajowa()
 
 --6b) Sprawdzenie, że wyzwalacz 1 działa
 update stanowisko 
