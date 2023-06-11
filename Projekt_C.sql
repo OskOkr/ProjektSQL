@@ -115,7 +115,7 @@ end;
 $$ LANGUAGE 'plpgsql';
 
 create trigger premia
-after update on stanowisko
+after update on pracownik
 for each row execute procedure premia()
 
 --7b) Sprawdzenie, że wyzwalacz 2 działa
